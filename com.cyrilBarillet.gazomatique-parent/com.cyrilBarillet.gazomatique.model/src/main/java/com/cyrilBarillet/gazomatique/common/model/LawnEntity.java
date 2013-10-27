@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.cyrilBarillet.gazomatique.model;
+package com.cyrilBarillet.gazomatique.common.model;
 
 import java.util.LinkedList;
 import java.util.List;

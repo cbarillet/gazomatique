@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.cyrilBarillet.gazomatique.model.valueObject;
+package com.cyrilBarillet.gazomatique.common.model.valueObject;
 
 import java.util.HashMap;
 import java.util.Map;

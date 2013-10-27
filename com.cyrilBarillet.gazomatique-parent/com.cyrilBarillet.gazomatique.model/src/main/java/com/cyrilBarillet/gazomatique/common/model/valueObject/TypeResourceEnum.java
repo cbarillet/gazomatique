@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.cyrilBarillet.gazomatique.model.valueObject;
+package com.cyrilBarillet.gazomatique.common.model.valueObject;
 
 /**
  * Enum of different type of resource where find data.

@@ -60,7 +60,6 @@
     <module>com.cyrilBarillet.gazomatique.model</module>
     <module>com.cyrilBarillet.gazomatique.dataAccess.factory</module>
     <module>com.cyrilBarillet.gazomatique.dataAccess.impl.simple</module>
-    
     <module>com.cyrilBarillet.gazomatique.dataAccess.api</module>
   </modules>
 </project>

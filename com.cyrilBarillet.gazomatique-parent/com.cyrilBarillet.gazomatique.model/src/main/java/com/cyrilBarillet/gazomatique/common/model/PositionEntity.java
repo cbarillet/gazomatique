@@ -1,4 +1,4 @@
-package com.cyrilBarillet.gazomatique.model;
+package com.cyrilBarillet.gazomatique.common.model;
 
 /**
  * PositionEntity allows to describes location and orientation.
