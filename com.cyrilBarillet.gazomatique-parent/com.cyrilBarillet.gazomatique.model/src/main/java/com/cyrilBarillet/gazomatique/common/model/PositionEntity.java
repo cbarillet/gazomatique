@@ -45,4 +45,9 @@ public class PositionEntity {
 	public OrientationEnum getOrientation() {
 		return orientation;
 	}
+	
+	protected void setOrientation(OrientationEnum orientation)
+	{
+		this.orientation = orientation;
+	}
 }

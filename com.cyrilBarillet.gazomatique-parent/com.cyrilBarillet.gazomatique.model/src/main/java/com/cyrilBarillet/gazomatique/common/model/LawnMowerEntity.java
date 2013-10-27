@@ -18,6 +18,11 @@ public class LawnMowerEntity {
 	 */
 	private PositionEntity currentPosition;
 	
+	/*
+	 * Order number of the lawn mower in lawn.
+	 */
+	private int index;
+	
 	/**
 	 * Build a new instance LawnMowerEntity.
 	 * 
@@ -36,7 +41,7 @@ public class LawnMowerEntity {
 	 * @param startingPosition starting position of the mower in the given lawn.
 	 * @param lawn lawn which will be mown by this mower.
 	 */
-	public LawnMowerEntity(int x, int y, OrientationEnum orientation, LawnEntity lawn) {
+	public LawnMowerEntity(int x, int y, OrientationEnum orientation, int index, LawnEntity lawn) {
 		super();
 		this.startingPosition = new PositionEntity(x, y, orientation);
 		this.lawn = lawn;
@@ -68,5 +73,26 @@ public class LawnMowerEntity {
 		return lawn;
 	}
 	
+	/**
+	 * @return the index
+	 */
+	public int getIndex()
+	{
+		return index;
+	}
 	
+	public void changeOrientation(OrientationEnum orientation)
+	{
+		this.getCurrentPosition().setOrientation(orientation);
+	}
+	
+	public void changeXCoordinate(int x)
+	{
+		this.getCurrentPosition().getCoordinates().setX(x);
+	}
+	
+	public void changeYCoordinate(int y)
+	{
+		this.getCurrentPosition().getCoordinates().setX(y);
+	}
 }

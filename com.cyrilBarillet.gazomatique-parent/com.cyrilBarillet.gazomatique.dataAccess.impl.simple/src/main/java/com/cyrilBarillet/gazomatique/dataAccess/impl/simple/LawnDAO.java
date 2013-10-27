@@ -56,6 +56,7 @@ public class LawnDAO implements ILawnDAO {
 					String lineFromFile = "";
 					int lineIndex = 1;
 					LawnEntity lawn = null;
+					int indexOfMower = 0;
 					while ((lineFromFile = reader.readLine()) != null) {
 						if (getLogger().isDebugEnabled()) {
 							getLogger().debug("Read line : " + lineFromFile);
@@ -67,8 +68,9 @@ public class LawnDAO implements ILawnDAO {
 						default:
 							switch (lineIndex % 2) {
 							case 0: // Position of mower
-								lawn.addLownMower(createLawnMower(lineFromFile,
+								lawn.addLownMower(createLawnMower(lineFromFile, indexOfMower,
 										lawn));
+								indexOfMower++;
 								break;
 							// case 1: Instruction for the mower. We process
 							// this data later.
@@ -88,14 +90,14 @@ public class LawnDAO implements ILawnDAO {
 		return null;
 	}
 
-	protected LawnMowerEntity createLawnMower(String line, LawnEntity lawn) {
+	protected LawnMowerEntity createLawnMower(String line, int index, LawnEntity lawn) {
 		if (line != null) {
 			String[] positions = line.split(SEPARATOR);
 			if (positions.length == 3) {
 				int x = Integer.parseInt(positions[0]);
 				int y = Integer.parseInt(positions[1]);
 				return new LawnMowerEntity(x, y,
-						OrientationEnum.getInstruction(positions[2]), lawn);
+						OrientationEnum.getInstruction(positions[2]), index, lawn);
 			} else {
 				if (getLogger().isErrorEnabled()) {
 					getLogger().error(

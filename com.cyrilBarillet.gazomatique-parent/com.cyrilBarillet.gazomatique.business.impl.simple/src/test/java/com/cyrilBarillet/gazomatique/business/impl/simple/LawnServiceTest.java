@@ -7,7 +7,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import com.cyrilBarillet.gazomatique.common.model.LawnEntity;
-import com.cyrilBarillet.gazomatique.common.model.valueObject.LawnInformationVO;
 import com.cyrilBarillet.gazomatique.common.model.valueObject.TextFileLawnInformationVO;
 
 import junit.framework.TestCase;

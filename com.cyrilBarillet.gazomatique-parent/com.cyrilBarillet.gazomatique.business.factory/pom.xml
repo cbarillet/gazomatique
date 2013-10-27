@@ -45,5 +45,12 @@
     	</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.cyrilBarillet.gazomatique</groupId>
+			<artifactId>
+				com.cyrilBarillet.gazomatique.common.tool
+			</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>

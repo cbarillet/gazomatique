@@ -3,10 +3,12 @@ package com.cyrilBarillet.gazomatique.business.factory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.cyrilBarillet.gazomatique.business.api.ICommandService;
 import com.cyrilBarillet.gazomatique.business.api.ILawnMowerService;
 import com.cyrilBarillet.gazomatique.business.api.ILawnService;
+import com.cyrilBarillet.gazomatique.common.tool.GenericFactory;
 
-public class ServiceFactory {
+public class ServiceFactory extends GenericFactory {
 	final Logger logger = LoggerFactory.getLogger(ServiceFactory.class);
 	private static ServiceFactory singleton = null;
 
@@ -14,7 +16,8 @@ public class ServiceFactory {
 		super();
 	}
 
-	private Logger getLogger()
+	@Override
+	protected Logger getLogger()
 	{
 		return logger;
 	}
@@ -27,34 +30,15 @@ public class ServiceFactory {
 	}
 
 	public ILawnMowerService getLawnMowerService() {
-		try {
-			return (ILawnMowerService) Class
-					.forName(
-							"com.cyrilBarillet.gazomatique.business.impl.simple.LawnMowerService")
-					.newInstance();
-		} catch (InstantiationException | IllegalAccessException
-				| ClassNotFoundException e) {
-			if(getLogger().isErrorEnabled())
-			{
-				getLogger().error("An error occured during com.cyrilBarillet.gazomatique.impl.simple.LawnMowerService instance creation", e);
-			}
-			throw new RuntimeException(e);
-		}
+		return getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.LawnMowerService");
 	}
 
 	public ILawnService getLawnService() {
-		try {
-			return (ILawnService) Class
-					.forName(
-							"com.cyrilBarillet.gazomatique.business.impl.simple.LawnService")
-					.newInstance();
-		} catch (InstantiationException | IllegalAccessException
-				| ClassNotFoundException e) {
-			if(getLogger().isErrorEnabled())
-			{
-				getLogger().error("An error occured during com.cyrilBarillet.gazomatique.impl.simple.LawnService instance creation", e);
-			}
-			throw new RuntimeException(e);
-		}
+		return getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.LawnService");
+	}
+	
+	public ICommandService getCommandService()
+	{
+		return getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.CommandService");
 	}
 }

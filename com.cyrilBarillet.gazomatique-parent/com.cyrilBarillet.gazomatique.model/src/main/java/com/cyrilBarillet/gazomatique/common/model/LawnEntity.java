@@ -6,6 +6,8 @@ package com.cyrilBarillet.gazomatique.common.model;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.cyrilBarillet.gazomatique.common.model.valueObject.LawnInformationVO;
+
 /**
  * Rectangular lawn to mow.
  * 

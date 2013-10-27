@@ -15,14 +15,32 @@ import com.cyrilBarillet.gazomatique.business.api.FinishMowingEventListener;
 import com.cyrilBarillet.gazomatique.business.api.ILawnMowerService;
 import com.cyrilBarillet.gazomatique.business.api.ILawnService;
 
+/**
+ * Implementation of the lawn manager.
+ * 
+ * @author cyrilbarillet
+ *
+ */
 public class LawnService implements ILawnService {
 
-	private ILawnDAO lawnDAO = null;
-	
+	/*
+	 * Listeners to notify when a lawn mow has finished its work.
+	 */
 	private List<FinishMowingEventListener> listeners = new CopyOnWriteArrayList<>();
 	
-	private ILawnMowerService lawnMowerService = null;
+	/*
+	 * Persistence manager of lawn.
+	 */
+	private ILawnDAO lawnDAO;
 	
+	/*
+	 * Manager of lawn mower.
+	 */
+	private ILawnMowerService lawnMowerService;
+	
+	/**
+	 * Constructor.
+	 */
 	public LawnService()
 	{
 		super();
@@ -31,19 +49,29 @@ public class LawnService implements ILawnService {
 	}
 	
 	@Override
-	public void Mow(LawnInformationVO information) {
+	public LawnEntity mow(LawnInformationVO information) {
 		LawnEntity lawn = load(information);
 		for (LawnMowerEntity mower : lawn.getLawnMowers()) {
-			getLawnMowerService().mow(mower);
+			getLawnMowerService().mow(information, mower);
 			fireFinishMowingEvent(mower);
 		}
+		return lawn;
 	}
-
+	
+	/**
+	 * Create new instance of LawnEntity with the data loaded thanks to the given information.
+	 * 
+	 * @param information information allow application to read data about lawn.
+	 * @return lawn defined by the given information.
+	 */
 	LawnEntity load(LawnInformationVO information)
 	{
 		return getLawnDAO().loadData(information);
 	}
 	
+	/**
+	 * @return listeners to notify when a lawn mower has finished its work.
+	 */
 	protected List<FinishMowingEventListener> getListeners()
 	{
 		return listeners;
@@ -63,6 +91,11 @@ public class LawnService implements ILawnService {
 		getListeners().remove(listener);
 	}
 
+	/**
+	 * Throw event to notify all listeners about end of mowing for the given mower. 
+	 * 
+	 * @param mower mower which has finished mowing.
+	 */
 	protected void fireFinishMowingEvent(LawnMowerEntity mower)
 	{
 		FinishMowingEvent event = new FinishMowingEvent(mower);
@@ -71,32 +104,20 @@ public class LawnService implements ILawnService {
 		}
 	}
 	
+	/**
+	 * @return the lawnMowerService
+	 */
 	protected ILawnMowerService getLawnMowerService()
 	{
 		return lawnMowerService;
 	}
 	
+	/**
+	 * @param lawnMowerService the lawnMowerService to set
+	 */
 	protected void setLawnMowerService(ILawnMowerService lawnMowerService)
 	{
 		this.lawnMowerService = lawnMowerService;
-	}
-
-	@Override
-	public boolean loadData(String resourceName) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean hasNext() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public LawnEntity nextCommand() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/**
