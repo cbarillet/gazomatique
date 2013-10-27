@@ -1,9 +1,10 @@
 package org.com.cyrilBarillet.gazomatique.dataAccess.impl.simple;
 
-import org.com.cyrilBarillet.gazomatique.dataAccess.api.ICommandDAO;
-import org.com.cyrilBarillet.gazomatique.model.CommandEntity;
+import com.cyrilBarillet.gazomatique.dataAccess.api.ICommandDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.cyrilBarillet.gazomatique.model.CommandEntity;
 
 public class CommandDAO implements ICommandDAO {
 

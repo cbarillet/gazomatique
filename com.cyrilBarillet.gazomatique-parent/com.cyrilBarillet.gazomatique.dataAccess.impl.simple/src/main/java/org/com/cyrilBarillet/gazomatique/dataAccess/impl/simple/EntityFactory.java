@@ -1,7 +1,7 @@
 package org.com.cyrilBarillet.gazomatique.dataAccess.impl.simple;
 
-import org.com.cyrilBarillet.gazomatique.model.CommandEntity;
-import org.com.cyrilBarillet.gazomatique.model.InstructionEnum;
+import com.cyrilBarillet.gazomatique.model.CommandEntity;
+import com.cyrilBarillet.gazomatique.model.InstructionEnum;
 
 public class EntityFactory {
 
