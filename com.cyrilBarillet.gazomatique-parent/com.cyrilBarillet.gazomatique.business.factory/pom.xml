@@ -1,31 +1,49 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.cyrilBarillet.gazomatique</groupId>
-    <artifactId>com.cyrilBarillet.gazomatique-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <artifactId>com.cyrilBarillet.gazomatique.business.factory</artifactId>
-  <name>com.cyrilBarillet.gazomatique.business.factory</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-    	<groupId>com.cyrilBarillet.gazomatique</groupId>
-    	<artifactId>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.cyrilBarillet.gazomatique</groupId>
+		<artifactId>com.cyrilBarillet.gazomatique-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>com.cyrilBarillet.gazomatique.business.factory</artifactId>
+	<name>com.cyrilBarillet.gazomatique.business.factory</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.10</version>
+				<configuration>
+					<additionalClasspathElements>
+						<additionalClasspathElement>${project.parent.basedir}/com.cyrilBarillet.gazomatique.business.impl.simple/target/classes/</additionalClasspathElement>
+						<additionalClasspathElement>${project.parent.basedir}/com.cyrilBarillet.gazomatique.dataAccess.impl.simple/target/classes/</additionalClasspathElement>
+						<additionalClasspathElement>${project.parent.basedir}/com.cyrilBarillet.gazomatique.dataAccess.factory/target/classes/</additionalClasspathElement>
+						<additionalClasspathElement>${project.parent.basedir}/com.cyrilBarillet.gazomatique.dataAccess.api/target/classes/</additionalClasspathElement>
+					</additionalClasspathElements>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.cyrilBarillet.gazomatique</groupId>
+			<artifactId>
     		com.cyrilBarillet.gazomatique.business.api
     	</artifactId>
-    	<version>0.0.1-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
