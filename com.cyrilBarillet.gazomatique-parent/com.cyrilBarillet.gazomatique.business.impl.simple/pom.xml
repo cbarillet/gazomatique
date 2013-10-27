@@ -29,13 +29,27 @@
     </dependency>
     <dependency>
     	<groupId>com.cyrilBarillet.gazomatique</groupId>
-    	<artifactId>com.cyrilBarillet.gazomatique.model</artifactId>
+    	<artifactId>com.cyrilBarillet.gazomatique.common.model</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
     	<groupId>com.cyrilBarillet.gazomatique</groupId>
     	<artifactId>
     		com.cyrilBarillet.gazomatique.business.factory
+    	</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+    	<groupId>com.cyrilBarillet.gazomatique</groupId>
+    	<artifactId>
+    		com.cyrilBarillet.gazomatique.dataAccess.factory
+    	</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+    	<groupId>com.cyrilBarillet.gazomatique</groupId>
+    	<artifactId>
+    		com.cyrilBarillet.gazomatique.dataAccess.api
     	</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>

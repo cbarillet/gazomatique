@@ -22,7 +22,7 @@
     </dependency>
     <dependency>
     	<groupId>com.cyrilBarillet.gazomatique</groupId>
-    	<artifactId>com.cyrilBarillet.gazomatique.model</artifactId>
+    	<artifactId>com.cyrilBarillet.gazomatique.common.model</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>

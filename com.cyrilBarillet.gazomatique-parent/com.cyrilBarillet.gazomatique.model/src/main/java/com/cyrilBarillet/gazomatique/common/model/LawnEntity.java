@@ -19,12 +19,19 @@ public class LawnEntity {
 	 */
 	private List<LawnMowerEntity> lawnMowers;
 	
+	/*
+	 * Bottom left corner location is (0,0).
+	 * System needs to know the location of top right corner of the lawn.
+	 */
+	private CoordinatesEntity topRightCorner;
+	
 	/**
 	 * Build a new instance of LawnEntity.
 	 */
-	public LawnEntity() {
+	public LawnEntity(int x, int y) {
 		super();
-		lawnMowers = new LinkedList<>();
+		setLawnMowers(new LinkedList<LawnMowerEntity>());
+		setTopRightCorner(new CoordinatesEntity(x, y));
 	}
 
 	/**
@@ -58,5 +65,19 @@ public class LawnEntity {
 		{
 			return false;
 		}
+	}
+
+	/**
+	 * @return the topRightCorner
+	 */
+	public CoordinatesEntity getTopRightCorner() {
+		return topRightCorner;
+	}
+
+	/**
+	 * @param topRightCorner the topRightCorner to set
+	 */
+	protected void setTopRightCorner(CoordinatesEntity topRightCorner) {
+		this.topRightCorner = topRightCorner;
 	}
 }

@@ -5,7 +5,7 @@ package com.cyrilBarillet.gazomatique.business.api;
 
 import java.util.EventObject;
 
-import com.cyrilBarillet.gazomatique.model.LawnMowerEntity;
+import com.cyrilBarillet.gazomatique.common.model.LawnMowerEntity;
 
 /**
  * @author cyrilbarillet

@@ -30,6 +30,18 @@ public class LawnMowerEntity {
 		this.lawn = lawn;
 	}
 	
+	/**
+	 * Build a new instance LawnMowerEntity.
+	 * 
+	 * @param startingPosition starting position of the mower in the given lawn.
+	 * @param lawn lawn which will be mown by this mower.
+	 */
+	public LawnMowerEntity(int x, int y, OrientationEnum orientation, LawnEntity lawn) {
+		super();
+		this.startingPosition = new PositionEntity(x, y, orientation);
+		this.lawn = lawn;
+	}
+	
 	/*
 	 * Lawn in which is the mower.
 	 */

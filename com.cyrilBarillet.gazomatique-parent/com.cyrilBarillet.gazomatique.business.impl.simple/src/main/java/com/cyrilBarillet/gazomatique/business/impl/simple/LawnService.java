@@ -3,11 +3,13 @@ package com.cyrilBarillet.gazomatique.business.impl.simple;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.cyrilBarillet.gazomatique.business.factory.ServiceFactory;
-import com.cyrilBarillet.gazomatique.model.LawnEntity;
-import com.cyrilBarillet.gazomatique.model.LawnMowerEntity;
-import com.cyrilBarillet.gazomatique.model.valueObject.LawnInformationVO;
+import org.com.cyrilBarillet.gazomatique.dataAccess.factory.DAOFactory;
 
+import com.cyrilBarillet.gazomatique.business.factory.ServiceFactory;
+import com.cyrilBarillet.gazomatique.common.model.LawnEntity;
+import com.cyrilBarillet.gazomatique.common.model.LawnMowerEntity;
+import com.cyrilBarillet.gazomatique.common.model.valueObject.LawnInformationVO;
+import com.cyrilBarillet.gazomatique.dataAccess.api.ILawnDAO;
 import com.cyrilBarillet.gazomatique.business.api.FinishMowingEvent;
 import com.cyrilBarillet.gazomatique.business.api.FinishMowingEventListener;
 import com.cyrilBarillet.gazomatique.business.api.ILawnMowerService;
@@ -15,15 +17,22 @@ import com.cyrilBarillet.gazomatique.business.api.ILawnService;
 
 public class LawnService implements ILawnService {
 
-	private final List<FinishMowingEventListener> listeners = new CopyOnWriteArrayList<>();
+	private ILawnDAO lawnDAO = null;
+	
+	private List<FinishMowingEventListener> listeners = new CopyOnWriteArrayList<>();
 	
 	private ILawnMowerService lawnMowerService = null;
 	
+	public LawnService()
+	{
+		super();
+		setLawnMowerService(lawnMowerService = ServiceFactory.getInstance().getLawnMowerService());
+		setLawnDAO(DAOFactory.getInstance().getLawnDAO());
+	}
+	
 	@Override
 	public void Mow(LawnInformationVO information) {
-		// TODO créer la pelouse
 		LawnEntity lawn = load(information);
-		// TODO pour chaque tondeuse lancer la tonte
 		for (LawnMowerEntity mower : lawn.getLawnMowers()) {
 			getLawnMowerService().mow(mower);
 			fireFinishMowingEvent(mower);
@@ -32,7 +41,7 @@ public class LawnService implements ILawnService {
 
 	LawnEntity load(LawnInformationVO information)
 	{
-		return null;
+		return getLawnDAO().loadData(information);
 	}
 	
 	protected List<FinishMowingEventListener> getListeners()
@@ -64,10 +73,50 @@ public class LawnService implements ILawnService {
 	
 	protected ILawnMowerService getLawnMowerService()
 	{
-		if(lawnMowerService == null)
-		{
-			lawnMowerService = ServiceFactory.getInstance().getLawnMowerService();
-		}
 		return lawnMowerService;
+	}
+	
+	protected void setLawnMowerService(ILawnMowerService lawnMowerService)
+	{
+		this.lawnMowerService = lawnMowerService;
+	}
+
+	@Override
+	public boolean loadData(String resourceName) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean hasNext() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public LawnEntity nextCommand() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * @return the lawnDAO
+	 */
+	protected ILawnDAO getLawnDAO() {
+		return lawnDAO;
+	}
+
+	/**
+	 * @param lawnDAO the lawnDAO to set
+	 */
+	protected void setLawnDAO(ILawnDAO lawnDAO) {
+		this.lawnDAO = lawnDAO;
+	}
+
+	/**
+	 * @param listeners the listeners to set
+	 */
+	protected void setListeners(List<FinishMowingEventListener> listeners) {
+		this.listeners = listeners;
 	}
 }

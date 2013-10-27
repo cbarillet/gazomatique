@@ -1,12 +1,12 @@
-package org.com.cyrilBarillet.gazomatique.dataAccess.impl.simple;
+package com.cyrilBarillet.gazomatique.dataAccess.impl.simple;
 
-import com.cyrilBarillet.gazomatique.dataAccess.api.ICommandDAO;
+//import com.cyrilBarillet.gazomatique.dataAccess.api.ICommandDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cyrilBarillet.gazomatique.model.CommandEntity;
+import com.cyrilBarillet.gazomatique.common.model.CommandEntity;
 
-public class CommandDAO implements ICommandDAO {
+public class CommandDAO /*implements ICommandDAO*/ {
 
 	final Logger logger = LoggerFactory.getLogger(CommandDAO.class);
 	
@@ -25,7 +25,7 @@ public class CommandDAO implements ICommandDAO {
 		return logger;
 	}
 	
-	@Override
+	//@Override
 	public CommandEntity nextCommand() 
 	{
 		// Check if developer has called read method.
@@ -44,13 +44,13 @@ public class CommandDAO implements ICommandDAO {
 		return EntityFactory.getInstance().getCommandEntity(readCommand);
 	}
 
-	@Override
+	//@Override
 	public boolean read(String resourceName) {
 		index = 0;
 		return true;
 	}
 
-	@Override
+	//@Override
 	public boolean hasNext() {
 		return commands.length > index;
 	}

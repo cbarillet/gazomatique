@@ -28,7 +28,7 @@ public abstract class LawnInformationVO {
 	 * @param typeResource
 	 * @param data
 	 */
-	protected LawnInformationVO(final TypeResourceEnum typeResource) {
+	public LawnInformationVO(final TypeResourceEnum typeResource) {
 		super();
 		this.typeResource = typeResource;
 		this.data = new HashMap<>();

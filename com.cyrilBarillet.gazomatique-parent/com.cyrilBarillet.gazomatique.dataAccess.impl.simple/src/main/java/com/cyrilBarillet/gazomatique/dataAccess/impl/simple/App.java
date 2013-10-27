@@ -1,4 +1,4 @@
-package com.cyrilBarillet.gazomatique.dataAccess.api;
+package com.cyrilBarillet.gazomatique.dataAccess.impl.simple;
 
 /**
  * Hello world!

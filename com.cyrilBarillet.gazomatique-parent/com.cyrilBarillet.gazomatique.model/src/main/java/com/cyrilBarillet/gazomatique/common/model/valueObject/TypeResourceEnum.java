@@ -10,5 +10,12 @@ package com.cyrilBarillet.gazomatique.common.model.valueObject;
  *
  */
 public enum TypeResourceEnum {
-	TEXT_FILE // Data are in a texte file
+	/**
+	 * Data are in a text file
+	 */
+	TEXT_FILE,
+	/**
+	 * Data are directly available
+	 */
+	DATA
 }

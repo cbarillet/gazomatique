@@ -15,7 +15,7 @@ public class TextFileLawnInformationVO extends LawnInformationVO {
 	 * @param typeResource
 	 * @param data
 	 */
-	 protected TextFileLawnInformationVO(String filePath) {
+	 public TextFileLawnInformationVO(String filePath) {
 		super(TypeResourceEnum.TEXT_FILE);
 		this.getData().put(FILE_NAME_KEY, filePath);
 	 }

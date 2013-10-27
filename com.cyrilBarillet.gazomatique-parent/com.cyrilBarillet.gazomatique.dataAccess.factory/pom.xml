@@ -27,5 +27,13 @@
     	</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+    	<groupId>com.cyrilBarillet.gazomatique</groupId>
+    	<artifactId>
+    		com.cyrilBarillet.gazomatique.dataAccess.impl.simple
+    	</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    	<scope>runtime</scope>
+    </dependency>
   </dependencies>
 </project>

@@ -30,7 +30,7 @@ public class ServiceFactory {
 		try {
 			return (ILawnMowerService) Class
 					.forName(
-							"com.cyrilBarillet.gazomatique.impl.simple.LawnMowerService")
+							"com.cyrilBarillet.gazomatique.business.impl.simple.LawnMowerService")
 					.newInstance();
 		} catch (InstantiationException | IllegalAccessException
 				| ClassNotFoundException e) {

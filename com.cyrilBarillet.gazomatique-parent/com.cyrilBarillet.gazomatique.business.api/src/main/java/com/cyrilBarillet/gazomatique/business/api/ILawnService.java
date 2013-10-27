@@ -1,6 +1,7 @@
 package com.cyrilBarillet.gazomatique.business.api;
 
-import com.cyrilBarillet.gazomatique.model.valueObject.LawnInformationVO;
+import com.cyrilBarillet.gazomatique.common.model.LawnEntity;
+import com.cyrilBarillet.gazomatique.common.model.valueObject.LawnInformationVO;
 
 public interface ILawnService {
 	void Mow(LawnInformationVO information);
@@ -8,4 +9,10 @@ public interface ILawnService {
 	void addFinishMowingEventListener(FinishMowingEventListener listener);
 	
     void removeFinishMowingEventListener(FinishMowingEventListener listener);
+    
+    boolean loadData(String resourceName);
+	
+	boolean hasNext();
+	
+	LawnEntity nextCommand();
 }

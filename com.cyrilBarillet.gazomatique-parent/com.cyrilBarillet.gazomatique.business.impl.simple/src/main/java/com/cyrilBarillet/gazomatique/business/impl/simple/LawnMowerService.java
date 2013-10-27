@@ -4,7 +4,7 @@
 package com.cyrilBarillet.gazomatique.business.impl.simple;
 
 import com.cyrilBarillet.gazomatique.business.api.ILawnMowerService;
-import com.cyrilBarillet.gazomatique.model.LawnMowerEntity;
+import com.cyrilBarillet.gazomatique.common.model.LawnMowerEntity;
 
 /**
  * @author cyrilbarillet
