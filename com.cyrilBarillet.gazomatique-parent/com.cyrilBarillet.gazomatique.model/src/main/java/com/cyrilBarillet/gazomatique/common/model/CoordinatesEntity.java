@@ -58,4 +58,13 @@ public class CoordinatesEntity {
 		this.y = y;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof CoordinatesEntity)
+		{
+			CoordinatesEntity other = (CoordinatesEntity) obj;
+			return other.getX() == this.getX() && other.getY() == this.getY();
+		}
+		return false;
+	}
 }

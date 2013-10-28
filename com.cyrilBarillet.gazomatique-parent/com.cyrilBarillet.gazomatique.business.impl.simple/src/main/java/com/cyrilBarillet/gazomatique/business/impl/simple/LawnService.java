@@ -44,7 +44,7 @@ public class LawnService implements ILawnService {
 	public LawnService()
 	{
 		super();
-		setLawnMowerService(lawnMowerService = ServiceFactory.getInstance().getLawnMowerService());
+		setLawnMowerService(ServiceFactory.getInstance().getLawnMowerService());
 		setLawnDAO(DAOFactory.getInstance().getLawnDAO());
 	}
 	

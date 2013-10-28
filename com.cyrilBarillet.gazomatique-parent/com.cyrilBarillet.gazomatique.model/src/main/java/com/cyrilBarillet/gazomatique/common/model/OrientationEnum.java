@@ -24,6 +24,7 @@ public enum OrientationEnum
 		case "E":
 			return OrientationEnum.EAST;
 		case "W":
+			return OrientationEnum.WEST;
 			default:
 				throw new RuntimeException("Unexpected orientation : " + orientation);
 		}

@@ -90,7 +90,7 @@ public class LawnMowerService implements ILawnMowerService {
 				{
 				case EAST:
 					newXCoordinate = lawnMower.getCurrentPosition().getCoordinates().x - 1;
-					if(newXCoordinate <= lawnMower.getLawn().getTopRightCorner().x)
+					if(newXCoordinate >= 0)
 					{
 						lawnMower.changeYCoordinate(newXCoordinate);
 					}
@@ -118,7 +118,7 @@ public class LawnMowerService implements ILawnMowerService {
 					break;
 				case SOUTH:
 					newYCoordinate = lawnMower.getCurrentPosition().getCoordinates().y - 1;
-					if(newYCoordinate <= lawnMower.getLawn().getTopRightCorner().y)
+					if(newYCoordinate >= 0)
 					{
 						lawnMower.changeYCoordinate(newYCoordinate);
 					}

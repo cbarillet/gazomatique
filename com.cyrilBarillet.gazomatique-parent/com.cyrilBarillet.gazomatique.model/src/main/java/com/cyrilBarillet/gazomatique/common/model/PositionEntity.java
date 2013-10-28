@@ -50,4 +50,15 @@ public class PositionEntity {
 	{
 		this.orientation = orientation;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof PositionEntity)
+		{
+			PositionEntity other = (PositionEntity) obj;
+			return other.getCoordinates().equals(this.getCoordinates())
+					&& other.getOrientation().equals(this.getOrientation());
+		}
+		return false;
+	}
 }
