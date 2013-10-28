@@ -42,7 +42,17 @@ public class LawnServiceTest extends TestCase {
 	 * Test method for {@link com.cyrilBarillet.gazomatique.business.impl.simple.LawnService#Mow(com.cyrilBarillet.gazomatique.common.model.valueObject.LawnInformationVO)}.
 	 */
 	public void testMow() {
-		
+		LawnService service = new LawnService();
+		URL resourceURL = getClass().getResource("/test1.txt");
+		/*
+		try {
+			//LawnEntity lawn = service.mow(information);
+			//Cas où pas les bonnes coordonnées de départ
+			//assertNotNull(lawn);
+			//assertEquals(2, lawn.getLawnMowers().size());
+		} catch (URISyntaxException e) {
+			fail();
+		}*/
 	}
 
 	/**

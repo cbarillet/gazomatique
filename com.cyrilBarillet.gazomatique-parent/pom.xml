@@ -62,5 +62,6 @@
     <module>com.cyrilBarillet.gazomatique.dataAccess.impl.simple</module>
     <module>com.cyrilBarillet.gazomatique.dataAccess.api</module>
     <module>com.cyrilBarillet.gazomatique.common.tool</module>
+    <module>com.cyrilBarillet.gazomatique.ui.console</module>
   </modules>
 </project>

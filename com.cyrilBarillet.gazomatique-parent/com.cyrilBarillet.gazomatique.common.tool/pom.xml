@@ -7,9 +7,7 @@
     <artifactId>com.cyrilBarillet.gazomatique-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.cyrilBarillet.gazomatique</groupId>
   <artifactId>com.cyrilBarillet.gazomatique.common.tool</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>com.cyrilBarillet.gazomatique.common.tool</name>
   <url>http://maven.apache.org</url>
   <properties>
