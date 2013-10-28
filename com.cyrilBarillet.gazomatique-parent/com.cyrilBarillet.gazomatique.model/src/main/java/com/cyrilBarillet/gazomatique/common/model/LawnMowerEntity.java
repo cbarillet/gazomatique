@@ -47,6 +47,7 @@ public class LawnMowerEntity {
 		super();
 		this.startingPosition = new PositionEntity(x, y, orientation);
 		this.lawn = lawn;
+		this.index = index;
 		// At the beginning, current position is equal to starting position.
 		this.currentPosition = new PositionEntity(startingPosition.getCoordinates().getX(), 
 						startingPosition.getCoordinates().getY(), startingPosition.getOrientation());
@@ -113,6 +114,6 @@ public class LawnMowerEntity {
 	 */
 	public void changeYCoordinate(int y)
 	{
-		this.getCurrentPosition().getCoordinates().setX(y);
+		this.getCurrentPosition().getCoordinates().setY(y);
 	}
 }

@@ -48,8 +48,10 @@ public class LawnMowerService implements ILawnMowerService {
 	
 	@Override
 	public void mow(LawnInformationVO information, LawnMowerEntity lawnMower) {
-		List<CommandEntity> commands = getCommandService().loadForLawnMower(information, lawnMower);
 		int newXCoordinate, newYCoordinate;
+		// We load the commands for the current mower
+		List<CommandEntity> commands = getCommandService().loadForLawnMower(information, lawnMower);
+		// We execute each commands
 		for (CommandEntity commandEntity : commands) {
 			switch(commandEntity.getInstruction())
 			{
@@ -57,42 +59,45 @@ public class LawnMowerService implements ILawnMowerService {
 				switch(lawnMower.getCurrentPosition().getOrientation())
 				{
 				case EAST:
-					lawnMower.changeOrientation(OrientationEnum.SOUTH);
-					break;
-				case NORTH:
-					lawnMower.changeOrientation(OrientationEnum.EAST);
-					break;
-				case SOUTH:
-					lawnMower.changeOrientation(OrientationEnum.WEST);
-					break;
-				case WEST:
 					lawnMower.changeOrientation(OrientationEnum.NORTH);
 					break;
+				case NORTH:
+					lawnMower.changeOrientation(OrientationEnum.WEST);
+					break;
+				case SOUTH:
+					lawnMower.changeOrientation(OrientationEnum.EAST);
+					break;
+				case WEST:
+					lawnMower.changeOrientation(OrientationEnum.SOUTH);
+					break;
 				}
+				break;
 			case RIGHT:
 				switch(lawnMower.getCurrentPosition().getOrientation())
 				{
 				case EAST:
-					lawnMower.changeOrientation(OrientationEnum.NORTH);
-					break;
-				case NORTH:
-					lawnMower.changeOrientation(OrientationEnum.WEST);
-					break;
-				case SOUTH:
-					lawnMower.changeOrientation(OrientationEnum.EAST);
-					break;
-				case WEST:
 					lawnMower.changeOrientation(OrientationEnum.SOUTH);
 					break;
+				case NORTH:
+					lawnMower.changeOrientation(OrientationEnum.EAST);
+					break;
+				case SOUTH:
+					lawnMower.changeOrientation(OrientationEnum.WEST);
+					break;
+				case WEST:
+					lawnMower.changeOrientation(OrientationEnum.NORTH);
+					break;
 				}
+				break;
 			case MOVE:
 				switch(lawnMower.getCurrentPosition().getOrientation())
 				{
-				case EAST:
-					newXCoordinate = lawnMower.getCurrentPosition().getCoordinates().x - 1;
+				case WEST:
+					newXCoordinate = lawnMower.getCurrentPosition().getCoordinates().getX() - 1;
+					// We check if we go off
 					if(newXCoordinate >= 0)
 					{
-						lawnMower.changeYCoordinate(newXCoordinate);
+						lawnMower.changeXCoordinate(newXCoordinate);
 					}
 					else
 					{
@@ -103,8 +108,9 @@ public class LawnMowerService implements ILawnMowerService {
 					}
 					break;
 				case NORTH:
-					newYCoordinate = lawnMower.getCurrentPosition().getCoordinates().y + 1;
-					if(newYCoordinate <= lawnMower.getLawn().getTopRightCorner().y)
+					newYCoordinate = lawnMower.getCurrentPosition().getCoordinates().getY() + 1;
+					// We check if we go off
+					if(newYCoordinate <= lawnMower.getLawn().getTopRightCorner().getY())
 					{
 						lawnMower.changeYCoordinate(newYCoordinate);
 					}
@@ -117,7 +123,8 @@ public class LawnMowerService implements ILawnMowerService {
 					}
 					break;
 				case SOUTH:
-					newYCoordinate = lawnMower.getCurrentPosition().getCoordinates().y - 1;
+					newYCoordinate = lawnMower.getCurrentPosition().getCoordinates().getY() - 1;
+					// We check if we go off
 					if(newYCoordinate >= 0)
 					{
 						lawnMower.changeYCoordinate(newYCoordinate);
@@ -130,11 +137,12 @@ public class LawnMowerService implements ILawnMowerService {
 						}
 					}
 					break;
-				case WEST:
-					newXCoordinate = lawnMower.getCurrentPosition().getCoordinates().x + 1;
-					if(newXCoordinate <= lawnMower.getLawn().getTopRightCorner().x)
+				case EAST:
+					newXCoordinate = lawnMower.getCurrentPosition().getCoordinates().getX() + 1;
+					// We check if we go off
+					if(newXCoordinate <= lawnMower.getLawn().getTopRightCorner().getX())
 					{
-						lawnMower.changeYCoordinate(newXCoordinate);
+						lawnMower.changeXCoordinate(newXCoordinate);
 					}
 					else
 					{

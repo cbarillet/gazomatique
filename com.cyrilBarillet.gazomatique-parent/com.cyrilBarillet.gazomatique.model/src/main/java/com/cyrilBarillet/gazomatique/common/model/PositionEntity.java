@@ -36,14 +36,14 @@ public class PositionEntity {
 	 * @return the coordinates
 	 */
 	public CoordinatesEntity getCoordinates() {
-		return coordinates;
+		return this.coordinates;
 	}
 
 	/**
 	 * @return the orientation
 	 */
 	public OrientationEnum getOrientation() {
-		return orientation;
+		return this.orientation;
 	}
 	
 	protected void setOrientation(OrientationEnum orientation)
