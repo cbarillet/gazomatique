@@ -30,19 +30,67 @@ public class DAOFactory extends GenericFactory {
 		return singleton;
 	}
 	
-	public ILawnDAO getLawnDAO()
+	private ILawnDAO lawnFromDataDAO;
+	
+	private ILawnDAO lawnFromFileDAO;
+	
+	public ILawnDAO getLawnDAO(TypeResourceEnum typeResource)
 	{
-		return this.getInstanceOfType("com.cyrilBarillet.gazomatique.dataAccess.impl.simple.LawnDAO");
+		switch(typeResource)
+		{
+		case DATA:
+			if(lawnFromDataDAO == null)
+			{
+				if(getLogger().isDebugEnabled())
+				{
+					getLogger().debug("Asking for new instance of ILawnDAO (LawnFromDataDAO)");
+				}
+				lawnFromDataDAO = this.getInstanceOfType("com.cyrilBarillet.gazomatique.dataAccess.impl.simple.LawnFromDataDAO"); 
+			}
+			return lawnFromDataDAO;
+		case TEXT_FILE:
+			if(lawnFromFileDAO == null)
+			{
+				if(getLogger().isDebugEnabled())
+				{
+					getLogger().debug("Asking for new instance of ILawnDAO (LawnFromFileDAO)");
+				}
+				lawnFromFileDAO = this.getInstanceOfType("com.cyrilBarillet.gazomatique.dataAccess.impl.simple.LawnFromFileDAO"); 
+			}
+			return lawnFromFileDAO;
+			default:
+				throw new RuntimeException("Unexpected type : " + typeResource);
+		}
 	}
+	
+	private ICommandDAO commandFromDataDAO;
+	
+	private ICommandDAO commandFromFileDAO;
 	
 	public ICommandDAO getCommandDAO(TypeResourceEnum typeResource)
 	{
 		switch(typeResource)
 		{
 		case DATA:
-			return this.getInstanceOfType("com.cyrilBarillet.gazomatique.dataAccess.impl.simple.CommandDAO");
+			if(commandFromDataDAO == null)
+			{
+				if(getLogger().isDebugEnabled())
+				{
+					getLogger().debug("Asking for new instance of ICommandDAO (CommandFromDataDAO)");
+				}
+				commandFromDataDAO = this.getInstanceOfType("com.cyrilBarillet.gazomatique.dataAccess.impl.simple.CommandFromDataDAO"); 
+			}
+			return commandFromDataDAO;
 		case TEXT_FILE:
-			return this.getInstanceOfType("com.cyrilBarillet.gazomatique.dataAccess.impl.simple.CommandFromFileDAO");
+			if(commandFromFileDAO == null)
+			{
+				if(getLogger().isDebugEnabled())
+				{
+					getLogger().debug("Asking for new instance of ICommandDAO (CommandFromFileDAO)");
+				}
+				commandFromFileDAO = this.getInstanceOfType("com.cyrilBarillet.gazomatique.dataAccess.impl.simple.CommandFromFileDAO"); 
+			}
+			return commandFromFileDAO;
 			default:
 				throw new RuntimeException("Unexpected type : " + typeResource);
 		}

@@ -17,4 +17,14 @@ public class CommandEntity {
 	public String toString(){
 		return this.getInstruction().toString();
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof CommandEntity)
+		{
+			CommandEntity other = (CommandEntity) obj;
+			return other.getInstruction().equals(getInstruction());
+		}
+		return false;
+	}
 }

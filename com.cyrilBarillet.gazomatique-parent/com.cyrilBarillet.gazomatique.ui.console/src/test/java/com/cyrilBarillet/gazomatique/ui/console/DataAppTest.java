@@ -1,4 +1,4 @@
-package org.com.cyrilBarillet.gazomatique.dataAccess.impl.simple;
+package com.cyrilBarillet.gazomatique.ui.console;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -7,7 +7,7 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class DataAppTest 
     extends TestCase
 {
     /**
@@ -15,7 +15,7 @@ public class AppTest
      *
      * @param testName name of the test case
      */
-    public AppTest( String testName )
+    public DataAppTest( String testName )
     {
         super( testName );
     }
@@ -25,7 +25,7 @@ public class AppTest
      */
     public static Test suite()
     {
-        return new TestSuite( AppTest.class );
+        return new TestSuite( DataAppTest.class );
     }
 
     /**
@@ -33,6 +33,7 @@ public class AppTest
      */
     public void testApp()
     {
-        assertTrue( true );
+    	String[] args={"-d", "5 5\n1 2 N\nGAGAGAGAA\n3 3 E\nAADAADADDA"};
+    	App.main(args);
     }
 }

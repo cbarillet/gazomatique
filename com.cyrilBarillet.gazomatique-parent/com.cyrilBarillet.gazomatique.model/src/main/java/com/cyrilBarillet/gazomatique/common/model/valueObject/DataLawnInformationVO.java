@@ -20,7 +20,7 @@ public class DataLawnInformationVO extends LawnInformationVO {
 		this.getData().put(DATA_KEY, data);
 	 }
 	 
-	 public String getFilePath()
+	 public String getDataInfomation()
 	 {
 		 return (String) this.getData().get(DATA_KEY);
 	 }

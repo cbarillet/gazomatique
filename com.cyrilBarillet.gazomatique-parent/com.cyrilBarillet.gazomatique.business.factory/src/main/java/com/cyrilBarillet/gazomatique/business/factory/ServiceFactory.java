@@ -29,16 +29,43 @@ public class ServiceFactory extends GenericFactory {
 		return singleton;
 	}
 
+	private ILawnMowerService lawnMowerService;
 	public ILawnMowerService getLawnMowerService() {
-		return getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.LawnMowerService");
+		if(lawnMowerService == null)
+		{
+			if(getLogger().isDebugEnabled())
+			{
+				getLogger().debug("Asking for new instance of ILawnMowerService");
+			}
+			lawnMowerService = getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.LawnMowerService"); 
+		}
+		return lawnMowerService;
 	}
 
+	private ILawnService lawnService;
 	public ILawnService getLawnService() {
-		return getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.LawnService");
+		if(lawnService == null)
+		{
+			if(getLogger().isDebugEnabled())
+			{
+				getLogger().debug("Asking for new instance of ILawnService");
+			}
+			lawnService = getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.LawnService"); 
+		}
+		return lawnService;
 	}
 	
+	private ICommandService commandService;
 	public ICommandService getCommandService()
 	{
-		return getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.CommandService");
+		if(commandService == null)
+		{
+			if(getLogger().isDebugEnabled())
+			{
+				getLogger().debug("Asking for new instance of ICommandService");
+			}
+			commandService = getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.CommandService"); 
+		}
+		return commandService;
 	}
 }

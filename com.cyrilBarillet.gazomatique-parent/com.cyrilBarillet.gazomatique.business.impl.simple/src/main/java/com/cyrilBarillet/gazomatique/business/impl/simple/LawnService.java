@@ -9,6 +9,7 @@ import com.cyrilBarillet.gazomatique.business.factory.ServiceFactory;
 import com.cyrilBarillet.gazomatique.common.model.LawnEntity;
 import com.cyrilBarillet.gazomatique.common.model.LawnMowerEntity;
 import com.cyrilBarillet.gazomatique.common.model.valueObject.LawnInformationVO;
+import com.cyrilBarillet.gazomatique.common.model.valueObject.TypeResourceEnum;
 import com.cyrilBarillet.gazomatique.dataAccess.api.ILawnDAO;
 import com.cyrilBarillet.gazomatique.business.api.FinishMowingEvent;
 import com.cyrilBarillet.gazomatique.business.api.FinishMowingEventListener;
@@ -29,11 +30,6 @@ public class LawnService implements ILawnService {
 	private List<FinishMowingEventListener> listeners = new CopyOnWriteArrayList<>();
 	
 	/*
-	 * Persistence manager of lawn.
-	 */
-	private ILawnDAO lawnDAO;
-	
-	/*
 	 * Manager of lawn mower.
 	 */
 	private ILawnMowerService lawnMowerService;
@@ -45,15 +41,17 @@ public class LawnService implements ILawnService {
 	{
 		super();
 		setLawnMowerService(ServiceFactory.getInstance().getLawnMowerService());
-		setLawnDAO(DAOFactory.getInstance().getLawnDAO());
 	}
 	
 	@Override
 	public LawnEntity mow(LawnInformationVO information) {
 		LawnEntity lawn = load(information);
-		for (LawnMowerEntity mower : lawn.getLawnMowers()) {
-			getLawnMowerService().mow(information, mower);
-			fireFinishMowingEvent(mower);
+		if(lawn != null)
+		{
+			for (LawnMowerEntity mower : lawn.getLawnMowers()) {
+				getLawnMowerService().mow(information, mower);
+				fireFinishMowingEvent(mower);
+			}
 		}
 		return lawn;
 	}
@@ -66,7 +64,7 @@ public class LawnService implements ILawnService {
 	 */
 	LawnEntity load(LawnInformationVO information)
 	{
-		return getLawnDAO().loadData(information);
+		return getLawnDAO(information.getTypeResource()).loadData(information);
 	}
 	
 	/**
@@ -123,15 +121,8 @@ public class LawnService implements ILawnService {
 	/**
 	 * @return the lawnDAO
 	 */
-	protected ILawnDAO getLawnDAO() {
-		return lawnDAO;
-	}
-
-	/**
-	 * @param lawnDAO the lawnDAO to set
-	 */
-	protected void setLawnDAO(ILawnDAO lawnDAO) {
-		this.lawnDAO = lawnDAO;
+	protected ILawnDAO getLawnDAO(TypeResourceEnum typeResource) {
+		return DAOFactory.getInstance().getLawnDAO(typeResource);
 	}
 
 	/**
