@@ -23,7 +23,7 @@ import com.cyrilBarillet.gazomatique.business.api.ILawnService;
  *
  */
 public class LawnService implements ILawnService {
-
+	
 	/*
 	 * Listeners to notify when a lawn mow has finished its work.
 	 */

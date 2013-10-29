@@ -17,27 +17,23 @@ import com.cyrilBarillet.gazomatique.common.model.OrientationEnum;
 import com.cyrilBarillet.gazomatique.common.model.valueObject.LawnInformationVO;
 
 /**
+ * 
+ * @see com.cyrilBarillet.gazomatique.business.api.ILawnMowerService
  * @author cyrilbarillet
  * 
  */
 public class LawnMowerService implements ILawnMowerService {
 
+	/*
+	 * Logger of the class.
+	 */
 	final Logger logger = LoggerFactory.getLogger(LawnMowerService.class);
 
 	private ICommandService commandService;
 
-	private Logger getLogger() {
-		return logger;
-	}
-
-	protected ICommandService getCommandService() {
-		return commandService;
-	}
-
-	protected void setCommandService(ICommandService commandService) {
-		this.commandService = commandService;
-	}
-
+	/**
+	 * Constructor.
+	 */
 	public LawnMowerService() {
 		setCommandService(ServiceFactory.getInstance().getCommandService());
 	}
@@ -147,5 +143,29 @@ public class LawnMowerService implements ILawnMowerService {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * 
+	 * @return logger of the class
+	 */
+	private Logger getLogger() {
+		return logger;
+	}
+
+	/**
+	 * 
+	 * @return command service
+	 */
+	protected ICommandService getCommandService() {
+		return commandService;
+	}
+
+	/**
+	 * Set up command service
+	 * @param commandService instance to set up.
+	 */
+	protected void setCommandService(ICommandService commandService) {
+		this.commandService = commandService;
 	}
 }

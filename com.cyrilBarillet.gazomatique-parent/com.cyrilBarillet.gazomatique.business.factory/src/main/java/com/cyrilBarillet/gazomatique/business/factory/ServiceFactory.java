@@ -8,6 +8,12 @@ import com.cyrilBarillet.gazomatique.business.api.ILawnMowerService;
 import com.cyrilBarillet.gazomatique.business.api.ILawnService;
 import com.cyrilBarillet.gazomatique.common.tool.GenericFactory;
 
+/**
+ * Factory which manages the build of service
+ * 
+ * @author cyrilbarillet
+ *
+ */
 public class ServiceFactory extends GenericFactory {
 	final Logger logger = LoggerFactory.getLogger(ServiceFactory.class);
 	private static ServiceFactory singleton = null;

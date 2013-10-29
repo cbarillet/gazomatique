@@ -11,6 +11,9 @@ import com.cyrilBarillet.gazomatique.common.model.valueObject.LawnInformationVO;
 import com.cyrilBarillet.gazomatique.common.model.valueObject.TypeResourceEnum;
 import com.cyrilBarillet.gazomatique.dataAccess.api.ICommandDAO;
 
+/**
+ * @see com.cyrilBarillet.gazomatique.business.api.ICommandService
+ */
 public class CommandService implements ICommandService {
 	
 	protected ICommandDAO getCommandDAO(TypeResourceEnum typeResource)
