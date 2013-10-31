@@ -34,18 +34,14 @@ public class CommunicationService implements ICommunicationService {
 		setInterfaceName(interfaceName);
 	}
 	
-	private boolean listening = true;
-	public void stopListening() {
-		this.listening = false;
-	}
-	
 	@Override
 	public void listen() throws CommunicationException
 	{
 		try {
 			this.receiver = new Receiver(getIp(), getPort(), getMowerName(), getService(), getInterfaceName());
-			while (listening) {
-				Thread.sleep(2000);
+			synchronized(this)
+			{
+				wait();
 			}
 		} catch (Exception e) {
 			if(getLogger().isErrorEnabled())

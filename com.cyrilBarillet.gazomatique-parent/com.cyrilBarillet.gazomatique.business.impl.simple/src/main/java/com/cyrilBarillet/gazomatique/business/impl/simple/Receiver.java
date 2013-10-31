@@ -77,7 +77,10 @@ public class Receiver extends Thread {
 				}
 				getSocketReception().leaveGroup(getGroupIP());
 				getSocketReception().close();
-				getService().stopListening();
+				synchronized (getService())
+				{
+					getService().notify();
+				}
 			} catch (Exception exc) {
 				if(getLogger().isErrorEnabled())
 				{

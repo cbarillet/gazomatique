@@ -28,8 +28,6 @@ public interface ICommunicationService {
 	 */
 	void listen() throws CommunicationException;
 	
-	void stopListening();
-	
 	/**
 	 * Send the given data to other mower.
 	 * 
