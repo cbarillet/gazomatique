@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.cyrilBarillet.gazomatique.business.api.ICommandService;
+import com.cyrilBarillet.gazomatique.business.api.ICommunicationService;
 import com.cyrilBarillet.gazomatique.business.api.ILawnMowerService;
 import com.cyrilBarillet.gazomatique.business.api.ILawnService;
 import com.cyrilBarillet.gazomatique.common.tool.GenericFactory;
@@ -34,7 +35,7 @@ public class ServiceFactory extends GenericFactory {
 		}
 		return singleton;
 	}
-
+	
 	private ILawnMowerService lawnMowerService;
 	public ILawnMowerService getLawnMowerService() {
 		if(lawnMowerService == null)
@@ -74,4 +75,15 @@ public class ServiceFactory extends GenericFactory {
 		}
 		return commandService;
 	}
+	
+	private ICommunicationService communicationService;
+	public ICommunicationService getCommunicationService()
+	{
+		if(this.communicationService == null)
+		{
+			this.communicationService = getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.CommunicationService");
+		}
+		return communicationService;
+	}
+	
 }

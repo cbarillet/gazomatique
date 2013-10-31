@@ -1,7 +1,6 @@
 package com.cyrilBarillet.gazomatique.business.impl.simple;
 
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -9,16 +8,17 @@ import org.com.cyrilBarillet.gazomatique.dataAccess.factory.DAOFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.cyrilBarillet.gazomatique.business.api.FinishMowingEvent;
+import com.cyrilBarillet.gazomatique.business.api.FinishMowingEventListener;
+import com.cyrilBarillet.gazomatique.business.api.ICommunicationService;
+import com.cyrilBarillet.gazomatique.business.api.ILawnMowerService;
+import com.cyrilBarillet.gazomatique.business.api.ILawnService;
 import com.cyrilBarillet.gazomatique.business.factory.ServiceFactory;
 import com.cyrilBarillet.gazomatique.common.model.LawnEntity;
 import com.cyrilBarillet.gazomatique.common.model.LawnMowerEntity;
 import com.cyrilBarillet.gazomatique.common.model.valueObject.LawnInformationVO;
 import com.cyrilBarillet.gazomatique.common.model.valueObject.TypeResourceEnum;
 import com.cyrilBarillet.gazomatique.dataAccess.api.ILawnDAO;
-import com.cyrilBarillet.gazomatique.business.api.FinishMowingEvent;
-import com.cyrilBarillet.gazomatique.business.api.FinishMowingEventListener;
-import com.cyrilBarillet.gazomatique.business.api.ILawnMowerService;
-import com.cyrilBarillet.gazomatique.business.api.ILawnService;
 
 /**
  * Implementation of the lawn manager.
@@ -42,6 +42,8 @@ public class LawnService implements ILawnService {
 	 * Manager of lawn mower.
 	 */
 	private ILawnMowerService lawnMowerService;
+	
+	private ICommunicationService communicationService;
 
 	/*
 	 * YES if the mower must mow.
@@ -73,10 +75,6 @@ public class LawnService implements ILawnService {
 		return getLawnDAO(information.getTypeResource()).loadData(information);
 	}
 
-	public void receiveMowCommand() {
-		setStartMow(true);
-	}
-
 	protected String buildName(int index) {
 		return "#" + String.valueOf(index) + "#";
 	}
@@ -87,17 +85,11 @@ public class LawnService implements ILawnService {
 			InetAddress groupIP = InetAddress.getByName(ip);
 			String name = buildName(index);
 			String nameOfNextMower = buildName(index + 1);
+			this.communicationService = ServiceFactory.getInstance().getCommunicationService();
+			this.communicationService.setUp(groupIP, port, name, interfaceName);
 			if(index > 0)
 			{
-				Receiver receiver = new Receiver(groupIP, port, name, this,
-					interfaceName);
-				if(getLogger().isDebugEnabled())
-				{
-					getLogger().debug("Receiver : " + receiver);
-				}
-				while (!startMow) {
-					Thread.sleep(2000);
-				}
+				this.communicationService.listen();
 			}
 			// Amazing : we can mow ;-)
 			LawnEntity lawn = load(information);
@@ -105,14 +97,10 @@ public class LawnService implements ILawnService {
 			{
 				LawnMowerEntity mower = lawn.getLawnMowers().get(index);
 				launchMower(information, mower);
-				Sender sender = new Sender(groupIP, port, nameOfNextMower + "("
-					+ mower.getCurrentPosition().getCoordinates().getX() + ","
-					+ mower.getCurrentPosition().getCoordinates().getY() + ","
-					+ mower.getCurrentPosition().getOrientation() + ")", interfaceName);
-				if(getLogger().isDebugEnabled())
-				{
-					getLogger().debug("Sender : " + sender);
-				}
+				this.communicationService.send(nameOfNextMower + "("
+						+ mower.getCurrentPosition().getCoordinates().getX() + ","
+						+ mower.getCurrentPosition().getCoordinates().getY() + ","
+						+ mower.getCurrentPosition().getOrientation() + ")");
 			}
 			else
 			{

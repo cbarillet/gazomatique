@@ -43,5 +43,4 @@ public interface ILawnService {
     
     void start(LawnInformationVO information, int index, String ip, int port, String interfaceName);
     
-    void receiveMowCommand();
 }

@@ -14,7 +14,7 @@ import java.net.NetworkInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cyrilBarillet.gazomatique.business.api.ILawnService;
+import com.cyrilBarillet.gazomatique.business.api.ICommunicationService;
 
 /**
  * @author cyrilbarillet
@@ -28,10 +28,10 @@ public class Receiver extends Thread {
 	private int port;
 	private MulticastSocket socketReception;
 	private String mowerName;
-	private ILawnService service;
+	private ICommunicationService service;
 
 	public Receiver(InetAddress ip, int port, String mowerName,
-			ILawnService service, String interfaceName) throws Exception {
+			ICommunicationService service, String interfaceName) throws Exception {
 		this.service = service;
 		this.groupIP = ip;
 		this.port = port;
@@ -77,7 +77,7 @@ public class Receiver extends Thread {
 				}
 				getSocketReception().leaveGroup(getGroupIP());
 				getSocketReception().close();
-				getService().receiveMowCommand();
+				getService().stopListening();
 			} catch (Exception exc) {
 				if(getLogger().isErrorEnabled())
 				{
@@ -161,14 +161,14 @@ public class Receiver extends Thread {
 	/**
 	 * @return the service
 	 */
-	protected ILawnService getService() {
+	protected ICommunicationService getService() {
 		return service;
 	}
 
 	/**
 	 * @param service the service to set
 	 */
-	protected void setService(ILawnService service) {
+	protected void setService(ICommunicationService service) {
 		this.service = service;
 	}
 	
