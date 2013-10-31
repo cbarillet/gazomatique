@@ -20,6 +20,14 @@ public interface ILawnService {
 	LawnEntity mow(LawnInformationVO information);
 	
 	/**
+	 * Create new instance of LawnEntity with the data loaded thanks to the given information.
+	 * 
+	 * @param information information allow application to read data about lawn.
+	 * @return lawn defined by the given information.
+	 */
+	LawnEntity load(LawnInformationVO information);
+	
+	/**
 	 * Add a listener interested by the "FinishMowing" event. 
 	 * 
 	 * @param listener listener to notify when a lawn mower has finished.
@@ -32,4 +40,8 @@ public interface ILawnService {
 	 * @param listener listener to remove.
 	 */
     void removeFinishMowingEventListener(FinishMowingEventListener listener);
+    
+    void start(LawnInformationVO information, int index, String ip, int port, String interfaceName);
+    
+    void receiveMowCommand();
 }

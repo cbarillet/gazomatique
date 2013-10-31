@@ -37,7 +37,7 @@ public class LawnMowerService implements ILawnMowerService {
 	public LawnMowerService() {
 		setCommandService(ServiceFactory.getInstance().getCommandService());
 	}
-
+	
 	@Override
 	public void mow(LawnInformationVO information, LawnMowerEntity lawnMower) {
 		int newXCoordinate, newYCoordinate;

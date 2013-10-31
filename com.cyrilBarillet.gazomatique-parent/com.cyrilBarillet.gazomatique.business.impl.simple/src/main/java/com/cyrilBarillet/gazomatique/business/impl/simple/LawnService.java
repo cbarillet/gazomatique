@@ -1,9 +1,13 @@
 package com.cyrilBarillet.gazomatique.business.impl.simple;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.com.cyrilBarillet.gazomatique.dataAccess.factory.DAOFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.cyrilBarillet.gazomatique.business.factory.ServiceFactory;
 import com.cyrilBarillet.gazomatique.common.model.LawnEntity;
@@ -20,34 +24,42 @@ import com.cyrilBarillet.gazomatique.business.api.ILawnService;
  * Implementation of the lawn manager.
  * 
  * @author cyrilbarillet
- *
+ * 
  */
 public class LawnService implements ILawnService {
+
+	/*
+	 * Logger of the class.
+	 */
+	final Logger logger = LoggerFactory.getLogger(LawnService.class);
 	
 	/*
 	 * Listeners to notify when a lawn mow has finished its work.
 	 */
 	private List<FinishMowingEventListener> listeners = new CopyOnWriteArrayList<>();
-	
+
 	/*
 	 * Manager of lawn mower.
 	 */
 	private ILawnMowerService lawnMowerService;
+
+	/*
+	 * YES if the mower must mow.
+	 */
+	private boolean startMow = false;
 	
 	/**
 	 * Constructor.
 	 */
-	public LawnService()
-	{
+	public LawnService() {
 		super();
 		setLawnMowerService(ServiceFactory.getInstance().getLawnMowerService());
 	}
-	
+
 	@Override
 	public LawnEntity mow(LawnInformationVO information) {
 		LawnEntity lawn = load(information);
-		if(lawn != null)
-		{
+		if (lawn != null) {
 			for (LawnMowerEntity mower : lawn.getLawnMowers()) {
 				getLawnMowerService().mow(information, mower);
 				fireFinishMowingEvent(mower);
@@ -55,30 +67,71 @@ public class LawnService implements ILawnService {
 		}
 		return lawn;
 	}
-	
-	/**
-	 * Create new instance of LawnEntity with the data loaded thanks to the given information.
-	 * 
-	 * @param information information allow application to read data about lawn.
-	 * @return lawn defined by the given information.
-	 */
-	LawnEntity load(LawnInformationVO information)
-	{
+
+	@Override
+	public LawnEntity load(LawnInformationVO information) {
 		return getLawnDAO(information.getTypeResource()).loadData(information);
 	}
-	
+
+	public void receiveMowCommand() {
+		setStartMow(true);
+	}
+
+	protected String buildName(int index) {
+		return "#" + String.valueOf(index) + "#";
+	}
+
+	public void start(LawnInformationVO information, int index, String ip,
+			int port, String interfaceName) {
+		try {
+			InetAddress groupIP = InetAddress.getByName(ip);
+			String name = buildName(index);
+			String nameOfNextMower = buildName(index + 1);
+			Receiver receiver = new Receiver(groupIP, port, name, this,
+					interfaceName);
+			if(getLogger().isDebugEnabled())
+			{
+				getLogger().debug("Receiver : " + receiver);
+			}
+			while (!startMow) {
+				Thread.sleep(2000);
+			}
+			// Amazing : we can mow ;-)
+			LawnEntity lawn = load(information);
+			LawnMowerEntity mower = lawn.getLawnMowers().get(index);
+			launchMower(information, mower);
+			Sender sender = new Sender(groupIP, port, nameOfNextMower + "("
+					+ mower.getCurrentPosition().getCoordinates().getX() + ","
+					+ mower.getCurrentPosition().getCoordinates().getY() + ","
+					+ mower.getCurrentPosition().getOrientation() + ")");
+			if(getLogger().isDebugEnabled())
+			{
+				getLogger().debug("Sender : " + sender);
+			}
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void launchMower(LawnInformationVO information, LawnMowerEntity mower) {
+		getLawnMowerService().mow(information, mower);
+		fireFinishMowingEvent(mower);
+	}
+
 	/**
 	 * @return listeners to notify when a lawn mower has finished its work.
 	 */
-	protected List<FinishMowingEventListener> getListeners()
-	{
+	protected List<FinishMowingEventListener> getListeners() {
 		return listeners;
 	}
-	
+
 	@Override
 	public void addFinishMowingEventListener(FinishMowingEventListener listener) {
-		if(listener != null)
-		{
+		if (listener != null) {
 			getListeners().add(listener);
 		}
 	}
@@ -90,31 +143,31 @@ public class LawnService implements ILawnService {
 	}
 
 	/**
-	 * Throw event to notify all listeners about end of mowing for the given mower. 
+	 * Throw event to notify all listeners about end of mowing for the given
+	 * mower.
 	 * 
-	 * @param mower mower which has finished mowing.
+	 * @param mower
+	 *            mower which has finished mowing.
 	 */
-	protected void fireFinishMowingEvent(LawnMowerEntity mower)
-	{
+	protected void fireFinishMowingEvent(LawnMowerEntity mower) {
 		FinishMowingEvent event = new FinishMowingEvent(mower);
 		for (FinishMowingEventListener listener : getListeners()) {
 			listener.handleFinishMowingEvent(event);
 		}
 	}
-	
+
 	/**
 	 * @return the lawnMowerService
 	 */
-	protected ILawnMowerService getLawnMowerService()
-	{
+	protected ILawnMowerService getLawnMowerService() {
 		return lawnMowerService;
 	}
-	
+
 	/**
-	 * @param lawnMowerService the lawnMowerService to set
+	 * @param lawnMowerService
+	 *            the lawnMowerService to set
 	 */
-	protected void setLawnMowerService(ILawnMowerService lawnMowerService)
-	{
+	protected void setLawnMowerService(ILawnMowerService lawnMowerService) {
 		this.lawnMowerService = lawnMowerService;
 	}
 
@@ -126,9 +179,31 @@ public class LawnService implements ILawnService {
 	}
 
 	/**
-	 * @param listeners the listeners to set
+	 * @param listeners
+	 *            the listeners to set
 	 */
 	protected void setListeners(List<FinishMowingEventListener> listeners) {
 		this.listeners = listeners;
+	}
+
+	/**
+	 * @return the logger
+	 */
+	protected Logger getLogger() {
+		return logger;
+	}
+
+	/**
+	 * @return the startMow
+	 */
+	protected boolean isStartMow() {
+		return startMow;
+	}
+
+	/**
+	 * @param startMow the startMow to set
+	 */
+	protected void setStartMow(boolean startMow) {
+		this.startMow = startMow;
 	}
 }
