@@ -68,7 +68,6 @@ public class App {
 		options.addOption(OptionBuilder
 				.withArgName("network")
 				.hasArg()
-				.isRequired()
 				.withDescription(
 						"Network interface to use (ex : en1)")
 				.withLongOpt("network").create("n"));
@@ -93,7 +92,7 @@ public class App {
 				}
 				Integer orderNumberMower = Integer.parseInt(line.getOptionValue("i"));
 				Integer port = Integer.parseInt(line.getOptionValue("p"));
-				service.start(information, orderNumberMower.intValue(), line.getOptionValue("m"), port, line.getOptionValue("n"));
+				service.start(information, orderNumberMower.intValue(), line.getOptionValue("m"), port, line.hasOption("n") ? line.getOptionValue("n") : null);
 				return;
 			}
 		} catch (ParseException exp) {

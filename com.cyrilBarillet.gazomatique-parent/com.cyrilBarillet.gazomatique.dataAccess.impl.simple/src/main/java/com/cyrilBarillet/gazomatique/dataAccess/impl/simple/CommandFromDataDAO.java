@@ -24,6 +24,11 @@ public class CommandFromDataDAO extends GenericCommandDAO {
 			{
 				String separator = "\n";
 				String[] components = dataInformation.getDataInfomation().split(separator);
+				if(components.length < 2)
+				{
+					separator = "\\\\n";
+					components = dataInformation.getDataInfomation().split(separator);
+				}
 				int lineNumberOfCommands = 2 * index + 1 + 1;
 				if(components.length - 1 < lineNumberOfCommands)
 				{

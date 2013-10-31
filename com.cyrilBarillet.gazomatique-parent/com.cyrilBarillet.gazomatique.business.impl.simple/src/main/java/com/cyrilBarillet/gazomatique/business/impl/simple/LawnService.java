@@ -87,33 +87,42 @@ public class LawnService implements ILawnService {
 			InetAddress groupIP = InetAddress.getByName(ip);
 			String name = buildName(index);
 			String nameOfNextMower = buildName(index + 1);
-			Receiver receiver = new Receiver(groupIP, port, name, this,
-					interfaceName);
-			if(getLogger().isDebugEnabled())
+			if(index > 0)
 			{
-				getLogger().debug("Receiver : " + receiver);
-			}
-			while (!startMow) {
-				Thread.sleep(2000);
+				Receiver receiver = new Receiver(groupIP, port, name, this,
+					interfaceName);
+				if(getLogger().isDebugEnabled())
+				{
+					getLogger().debug("Receiver : " + receiver);
+				}
+				while (!startMow) {
+					Thread.sleep(2000);
+				}
 			}
 			// Amazing : we can mow ;-)
 			LawnEntity lawn = load(information);
-			LawnMowerEntity mower = lawn.getLawnMowers().get(index);
-			launchMower(information, mower);
-			Sender sender = new Sender(groupIP, port, nameOfNextMower + "("
+			if(lawn.getLawnMowers().size() > index)
+			{
+				LawnMowerEntity mower = lawn.getLawnMowers().get(index);
+				launchMower(information, mower);
+				Sender sender = new Sender(groupIP, port, nameOfNextMower + "("
 					+ mower.getCurrentPosition().getCoordinates().getX() + ","
 					+ mower.getCurrentPosition().getCoordinates().getY() + ","
-					+ mower.getCurrentPosition().getOrientation() + ")");
-			if(getLogger().isDebugEnabled())
-			{
-				getLogger().debug("Sender : " + sender);
+					+ mower.getCurrentPosition().getOrientation() + ")", interfaceName);
+				if(getLogger().isDebugEnabled())
+				{
+					getLogger().debug("Sender : " + sender);
+				}
 			}
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			else
+			{
+				if(getLogger().isWarnEnabled())
+				{
+					getLogger().warn("Nothing to do for lawn mower num " + index);
+				}
+			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			getLogger().error("An error occured", e);
 		}
 	}
 

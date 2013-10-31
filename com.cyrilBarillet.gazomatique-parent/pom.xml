@@ -65,6 +65,6 @@
 		<module>com.cyrilBarillet.gazomatique.common.tool</module>
 		<module>com.cyrilBarillet.gazomatique.ui.console</module>
 		<module>com.cyrilBarillet.gazomatique.ui.console.mower</module>
-		<module>com.cyrilBarillet.gazomatique.ui.console.sender</module>
+		
 	</modules>
 </project>

@@ -55,7 +55,13 @@ public class LawnFromDataDAO extends GenericLawnDAO {
 			{
 					String separator = SEPARATOR;
 					setIndex(0);
-					setLines(dataInformation.getDataInfomation().split(separator));
+					String[] components = dataInformation.getDataInfomation().split(separator);
+					if(components.length < 2)
+					{
+						separator = "\\\\n";
+						components = dataInformation.getDataInfomation().split(separator);
+					}
+					setLines(components);
 					return processLines();
 			}
 		}

@@ -37,7 +37,10 @@ public class Receiver extends Thread {
 		this.port = port;
 		this.mowerName = mowerName;
 		socketReception = new MulticastSocket(port);
-		socketReception.setNetworkInterface(NetworkInterface.getByName(interfaceName));
+		if(interfaceName != null)
+		{
+			socketReception.setNetworkInterface(NetworkInterface.getByName(interfaceName));
+		}
 		socketReception.joinGroup(ip);
 		start();
 	}
