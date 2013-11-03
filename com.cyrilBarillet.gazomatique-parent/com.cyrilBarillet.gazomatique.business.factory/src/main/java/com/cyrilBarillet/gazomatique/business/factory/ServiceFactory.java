@@ -81,7 +81,8 @@ public class ServiceFactory extends GenericFactory {
 	{
 		if(this.communicationService == null)
 		{
-			this.communicationService = getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.CommunicationService");
+			//this.communicationService = getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.CommunicationService");
+			this.communicationService = getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.CommunicationMulticastChannelService");
 		}
 		return communicationService;
 	}

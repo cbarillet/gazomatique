@@ -70,7 +70,7 @@ public class CommunicationService implements ICommunicationService {
 	 * 
 	 * @return the logger of the class.
 	 */
-	protected Logger getLogger()
+	private Logger getLogger()
 	{
 		return logger;
 	}

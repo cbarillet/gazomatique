@@ -36,10 +36,10 @@ public class AppTest
     public void testApp()
     {
     	
-    	String[] args={"-d", "5 5\\n1 2 N\\nGAGAGAGAA\\n3 3 E\\nAADAADADDA", "-i", "1", "-m", "228.0.0.4", "-p", "4003", "-n", "en1"};
+    	String[] args={"-d", "5 5\\n1 2 N\\nGAGAGAGAA\\n3 3 E\\nAADAADADDA", "-i", "1", "-m", "228.0.0.4", "-p", "4005", "-n", "en1"};
     	try {
-			new Emetteur(InetAddress.getByName("228.0.0.4"), 4003);
-			new Recepteur(InetAddress.getByName("228.0.0.4"), 4003);
+			new Emetteur(InetAddress.getByName("228.0.0.4"), 4005);
+			new Recepteur(InetAddress.getByName("228.0.0.4"), 4005);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
