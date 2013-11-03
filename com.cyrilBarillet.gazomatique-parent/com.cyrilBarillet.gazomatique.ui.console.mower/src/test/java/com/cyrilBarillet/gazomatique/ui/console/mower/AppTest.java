@@ -43,8 +43,8 @@ public class AppTest
     	
     	String[] args={"-d", "5 5\\n1 2 N\\nGAGAGAGAA\\n3 3 E\\nAADAADADDA", "-i", "1", "-m", "228.0.0.4", "-p", "4003", "-n", "en1"};
     	try {
-			new Emetteur(InetAddress.getByName("228.0.0.4"), 4003);
-			new Recepteur(InetAddress.getByName("228.0.0.4"), 4003);
+			new Sender(InetAddress.getByName("228.0.0.4"), 4003);
+			new Receiver(InetAddress.getByName("228.0.0.4"), 4003);
 		} catch (Exception e) {
 			if(getLogger().isErrorEnabled())
 			{

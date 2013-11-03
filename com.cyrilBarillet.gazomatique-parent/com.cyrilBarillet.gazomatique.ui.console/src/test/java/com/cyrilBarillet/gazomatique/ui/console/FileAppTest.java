@@ -7,12 +7,17 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Unit test for simple App.
  */
 public class FileAppTest 
     extends TestCase
 {
+	final Logger logger = LoggerFactory.getLogger(FileAppTest.class);
+	
     /**
      * Create the test case
      *
@@ -43,8 +48,15 @@ public class FileAppTest
     	} 
     	catch (URISyntaxException e)
     	{
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
+    		if(getLogger().isErrorEnabled())
+    		{
+    			getLogger().error("Error occured while getting resource /text.txt", e);
+    		}
     	}
+    }
+    
+    private Logger getLogger()
+    {
+    	return logger;
     }
 }
