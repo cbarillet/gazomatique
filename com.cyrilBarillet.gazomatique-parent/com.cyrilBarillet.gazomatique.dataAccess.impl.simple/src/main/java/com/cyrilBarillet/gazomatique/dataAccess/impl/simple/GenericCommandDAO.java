@@ -3,7 +3,7 @@
  */
 package com.cyrilBarillet.gazomatique.dataAccess.impl.simple;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -29,7 +29,7 @@ public abstract class GenericCommandDAO implements ICommandDAO {
 	
 	protected List<CommandEntity> createCommands(String lineOfCommands)
 	{
-		LinkedList<CommandEntity> commandEntities = new LinkedList<>();
+		List<CommandEntity> commandEntities = new ArrayList<>();
 		if(lineOfCommands != null)
 		{
 			for (char command : lineOfCommands.toCharArray()) {

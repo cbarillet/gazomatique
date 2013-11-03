@@ -2,6 +2,9 @@ package com.cyrilBarillet.gazomatique.ui.console.mower;
 
 import java.net.InetAddress;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -12,6 +15,8 @@ import junit.framework.TestSuite;
 public class AppTest 
     extends TestCase
 {
+	final Logger logger = LoggerFactory.getLogger(AppTest.class);
+	
     /**
      * Create the test case
      *
@@ -41,10 +46,16 @@ public class AppTest
 			new Emetteur(InetAddress.getByName("228.0.0.4"), 4003);
 			new Recepteur(InetAddress.getByName("228.0.0.4"), 4003);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if(getLogger().isErrorEnabled())
+			{
+				getLogger().error("An error occured while creating Emetteur and Recepteur instance", e);
+			}
 		}
-    	App.main(args);
-    	
+    	App.main(args);	
+    }
+    
+    private Logger getLogger()
+    {
+    	return logger;
     }
 }

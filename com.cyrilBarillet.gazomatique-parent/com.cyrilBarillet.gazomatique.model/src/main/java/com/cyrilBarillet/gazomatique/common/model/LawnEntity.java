@@ -3,7 +3,7 @@
  */
 package com.cyrilBarillet.gazomatique.common.model;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +30,7 @@ public class LawnEntity {
 	 */
 	public LawnEntity(int x, int y) {
 		super();
-		setLawnMowers(new LinkedList<LawnMowerEntity>());
+		setLawnMowers(new ArrayList<LawnMowerEntity>());
 		setTopRightCorner(new CoordinatesEntity(x, y));
 	}
 
