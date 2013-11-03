@@ -20,7 +20,7 @@ import com.cyrilBarillet.gazomatique.business.api.ICommunicationService;
  * @author cyrilbarillet
  * 
  */
-public class Receiver extends Thread {
+public class Receiver implements Runnable {
 	
 	final Logger logger = LoggerFactory.getLogger(Receiver.class);
 	
@@ -42,7 +42,6 @@ public class Receiver extends Thread {
 			socketReception.setNetworkInterface(NetworkInterface.getByName(interfaceName));
 		}
 		socketReception.joinGroup(ip);
-		start();
 	}
 
 	public void run() {

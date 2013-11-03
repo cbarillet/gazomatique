@@ -19,7 +19,6 @@ public class CommunicationService implements ICommunicationService {
 
 	final Logger logger = LoggerFactory.getLogger(CommunicationService.class);
 	
-	private Receiver receiver;
 	private InetAddress ip;
 	private int port;
 	private String mowerName;
@@ -38,7 +37,8 @@ public class CommunicationService implements ICommunicationService {
 	public void listen() throws CommunicationException
 	{
 		try {
-			this.receiver = new Receiver(getIp(), getPort(), getMowerName(), getService(), getInterfaceName());
+			Thread receiverThread = new Thread(new Receiver(getIp(), getPort(), getMowerName(), getService(), getInterfaceName()));
+			receiverThread.start();
 			synchronized(this)
 			{
 				wait();
@@ -56,7 +56,8 @@ public class CommunicationService implements ICommunicationService {
 	public void send(String data) throws CommunicationException
 	{
 		try {
-			new Sender(getIp(), getPort(), data, getInterfaceName());
+			Thread senderThread = new Thread(new Sender(getIp(), getPort(), data, getInterfaceName()));
+			senderThread.start();
 		} catch (Exception e) {
 			if(getLogger().isErrorEnabled())
 			{
@@ -73,20 +74,6 @@ public class CommunicationService implements ICommunicationService {
 	protected Logger getLogger()
 	{
 		return logger;
-	}
-
-	/**
-	 * @return the receiver
-	 */
-	protected Receiver getReceiver() {
-		return receiver;
-	}
-
-	/**
-	 * @param receiver the receiver to set
-	 */
-	protected void setReceiver(Receiver receiver) {
-		this.receiver = receiver;
 	}
 
 	/**

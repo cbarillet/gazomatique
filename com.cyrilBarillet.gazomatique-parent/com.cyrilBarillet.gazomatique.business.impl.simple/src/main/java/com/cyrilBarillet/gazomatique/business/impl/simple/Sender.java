@@ -10,7 +10,7 @@ import java.net.NetworkInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Sender extends Thread {
+public class Sender implements Runnable {
 	
 	final Logger logger = LoggerFactory.getLogger(Sender.class);
 	
@@ -29,7 +29,6 @@ public class Sender extends Thread {
 			socketEmission.setNetworkInterface(NetworkInterface.getByName(interfaceName));
 		}
 		socketEmission.setTimeToLive(15); // pour un site
-		start();
 	}
 
 	public void run() {

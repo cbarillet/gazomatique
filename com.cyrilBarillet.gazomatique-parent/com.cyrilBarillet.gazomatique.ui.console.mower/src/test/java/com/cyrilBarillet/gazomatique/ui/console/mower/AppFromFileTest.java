@@ -29,7 +29,7 @@ public class AppFromFileTest extends TestCase {
 		URL resourceURL = getClass().getResource("/test.txt");
 		try {
 			String[] args = { "-f",
-					resourceURL.toURI().getPath(), "-i", "0",
+					resourceURL.toURI().getPath(), "-i", "1",
 					"-m", "228.0.0.4", "-p", "4003", "-n", "en1" };
 			try {
 				new Sender(InetAddress.getByName("228.0.0.4"), 4003);
