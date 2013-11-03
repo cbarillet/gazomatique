@@ -12,17 +12,17 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class App1Test 
     extends TestCase
 {
-	final Logger logger = LoggerFactory.getLogger(AppTest.class);
+	final Logger logger = LoggerFactory.getLogger(App1Test.class);
 	
     /**
      * Create the test case
      *
      * @param testName name of the test case
      */
-    public AppTest( String testName )
+    public App1Test( String testName )
     {
         super( testName );
     }
@@ -32,7 +32,7 @@ public class AppTest
      */
     public static Test suite()
     {
-        return new TestSuite( AppTest.class );
+        return new TestSuite( App1Test.class );
     }
 
     /**

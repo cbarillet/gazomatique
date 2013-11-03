@@ -9,11 +9,11 @@ import junit.framework.TestCase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AppFromFileTest extends TestCase {
+public class App0FromFileTest extends TestCase {
 
-	final Logger logger = LoggerFactory.getLogger(AppFromFileTest.class);
+	final Logger logger = LoggerFactory.getLogger(App0FromFileTest.class);
 
-	public AppFromFileTest(String name) {
+	public App0FromFileTest(String name) {
 		super(name);
 	}
 
@@ -29,7 +29,7 @@ public class AppFromFileTest extends TestCase {
 		URL resourceURL = getClass().getResource("/test.txt");
 		try {
 			String[] args = { "-f",
-					resourceURL.toURI().getPath(), "-i", "1",
+					resourceURL.toURI().getPath(), "-i", "0",
 					"-m", "228.0.0.4", "-p", "4003", "-n", "en1" };
 			try {
 				new Sender(InetAddress.getByName("228.0.0.4"), 4003);

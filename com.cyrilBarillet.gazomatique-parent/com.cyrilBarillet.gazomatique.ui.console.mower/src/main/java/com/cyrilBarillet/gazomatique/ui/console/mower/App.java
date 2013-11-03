@@ -20,7 +20,7 @@ import com.cyrilBarillet.gazomatique.common.model.valueObject.LawnInformationVO;
 import com.cyrilBarillet.gazomatique.common.model.valueObject.TextFileLawnInformationVO;
 
 /**
- * Hello world!
+ * Run mower.
  * 
  */
 @SuppressWarnings("static-access")
