@@ -49,7 +49,8 @@ public class LawnServiceTest extends TestCase {
 		LawnService service = new LawnService();
 		URL resourceURL = getClass().getResource("/test.txt");
 		try {
-			LawnEntity lawn = service.load(new TextFileLawnInformationVO(resourceURL.toURI().getPath()));
+			File testFile = new File(resourceURL.toURI());
+			LawnEntity lawn = service.load(new TextFileLawnInformationVO(testFile.getPath()));
 			assertNotNull(lawn);
 			assertEquals(2, lawn.getLawnMowers().size());
 			int index = 0;
@@ -91,7 +92,8 @@ public class LawnServiceTest extends TestCase {
 		LawnService service = new LawnService();
 		URL resourceURL = getClass().getResource("/test2.txt");
 		try {
-			LawnEntity lawn = service.mow(new TextFileLawnInformationVO(resourceURL.toURI().getPath()));
+			File testFile = new File(resourceURL.toURI());
+			LawnEntity lawn = service.mow(new TextFileLawnInformationVO(testFile.getPath()));
 			assertNotNull(lawn);
 			for (LawnMowerEntity mower : lawn.getLawnMowers()) {
 				switch(mower.getIndex())
