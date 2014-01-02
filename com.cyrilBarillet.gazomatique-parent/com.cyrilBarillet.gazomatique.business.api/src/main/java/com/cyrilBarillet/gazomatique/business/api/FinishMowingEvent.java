@@ -9,7 +9,7 @@ import com.cyrilBarillet.gazomatique.common.model.LawnMowerEntity;
 
 /**
  * Event sent when a mower finish its instructions.
- * 
+ *
  * @author cyrilbarillet
  *
  */
@@ -24,7 +24,7 @@ public class FinishMowingEvent extends EventObject {
 	 * Constructor of the vent.
 	 * @param source element which throws this event.
 	 */
-	public FinishMowingEvent(LawnMowerEntity source) {
+	public FinishMowingEvent(final LawnMowerEntity source) {
 		super(source);
 	}
 }

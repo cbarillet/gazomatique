@@ -15,20 +15,22 @@ import com.cyrilBarillet.gazomatique.dataAccess.api.ICommandDAO;
  * @see com.cyrilBarillet.gazomatique.business.api.ICommandService
  */
 public class CommandService implements ICommandService {
-	
-	protected ICommandDAO getCommandDAO(TypeResourceEnum typeResource)
-	{
+
+	protected ICommandDAO getCommandDAO(final TypeResourceEnum typeResource) {
 		return DAOFactory.getInstance().getCommandDAO(typeResource);
 	}
-	
-	public CommandService()
-	{
+
+	public CommandService() {
 		super();
 	}
 	
 	@Override
-	public List<CommandEntity> loadForLawnMower(LawnInformationVO information, LawnMowerEntity mower) {
-		return getCommandDAO(information.getTypeResource()).findCommandByLawnMowerIndex(information,  mower.getIndex());
+	public final List<CommandEntity> loadForLawnMower(
+			final LawnInformationVO information,
+			final LawnMowerEntity mower) {
+		return getCommandDAO(information.getTypeResource())
+				.findCommandByLawnMowerIndex(
+						information, mower.getIndex());
 	}
 
 }

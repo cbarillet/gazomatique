@@ -17,17 +17,17 @@ import com.cyrilBarillet.gazomatique.common.model.OrientationEnum;
 import com.cyrilBarillet.gazomatique.common.model.valueObject.LawnInformationVO;
 
 /**
- * 
+ *
  * @see com.cyrilBarillet.gazomatique.business.api.ILawnMowerService
  * @author cyrilbarillet
- * 
+ *
  */
 public class LawnMowerService implements ILawnMowerService {
 
 	/*
 	 * Logger of the class.
 	 */
-	final Logger logger = LoggerFactory.getLogger(LawnMowerService.class);
+	private final Logger logger = LoggerFactory.getLogger(LawnMowerService.class);
 
 	private ICommandService commandService;
 
@@ -35,15 +35,17 @@ public class LawnMowerService implements ILawnMowerService {
 	 * Constructor.
 	 */
 	public LawnMowerService() {
-		setCommandService(ServiceFactory.getInstance().getCommandService());
+		setCommandService(ServiceFactory
+				.getInstance().getCommandService());
 	}
 
 	@Override
-	public void mow(LawnInformationVO information, LawnMowerEntity lawnMower) {
+	public final void mow(final LawnInformationVO information,
+			final LawnMowerEntity lawnMower) {
 		int newXCoordinate, newYCoordinate;
 		// We load the commands for the current mower
-		List<CommandEntity> commands = getCommandService().loadForLawnMower(
-				information, lawnMower);
+		List<CommandEntity> commands = getCommandService()
+				.loadForLawnMower(information, lawnMower);
 		// We execute each commands
 		if (commands != null) {
 			for (CommandEntity commandEntity : commands) {

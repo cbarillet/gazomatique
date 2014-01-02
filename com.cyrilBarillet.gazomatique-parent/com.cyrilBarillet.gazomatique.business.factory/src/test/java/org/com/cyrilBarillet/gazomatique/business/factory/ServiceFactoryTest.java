@@ -22,8 +22,7 @@ public class ServiceFactoryTest extends TestCase {
 		ServiceFactory instance1 = ServiceFactory.getInstance();
 		assertNotNull(instance1);
 		ServiceFactory instance2 = null;
-		for(int i = 0; i < 10; i++)
-		{
+		for(int i = 0; i < 10; i++) {
 			instance2 = ServiceFactory.getInstance();
 			assertEquals(instance1, instance2);
 		}

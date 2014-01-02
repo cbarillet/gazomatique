@@ -9,8 +9,7 @@ import com.cyrilBarillet.gazomatique.business.api.ILawnService;
 import com.cyrilBarillet.gazomatique.common.tool.GenericFactory;
 
 /**
- * Factory which manages the build of service
- * 
+ * Factory which manages the build of service.
  * @author cyrilbarillet
  *
  */
@@ -37,10 +36,8 @@ public class ServiceFactory extends GenericFactory {
 
 	private ILawnMowerService lawnMowerService;
 	public ILawnMowerService getLawnMowerService() {
-		if(lawnMowerService == null)
-		{
-			if(getLogger().isDebugEnabled())
-			{
+		if (lawnMowerService == null) {
+			if (getLogger().isDebugEnabled()) {
 				getLogger().debug("Asking for new instance of ILawnMowerService");
 			}
 			lawnMowerService = getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.LawnMowerService"); 
@@ -50,10 +47,8 @@ public class ServiceFactory extends GenericFactory {
 
 	private ILawnService lawnService;
 	public ILawnService getLawnService() {
-		if(lawnService == null)
-		{
-			if(getLogger().isDebugEnabled())
-			{
+		if (lawnService == null) {
+			if (getLogger().isDebugEnabled()) {
 				getLogger().debug("Asking for new instance of ILawnService");
 			}
 			lawnService = getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.LawnService"); 
@@ -64,10 +59,8 @@ public class ServiceFactory extends GenericFactory {
 	private ICommandService commandService;
 	public ICommandService getCommandService()
 	{
-		if(commandService == null)
-		{
-			if(getLogger().isDebugEnabled())
-			{
+		if (commandService == null) {
+			if (getLogger().isDebugEnabled()) {
 				getLogger().debug("Asking for new instance of ICommandService");
 			}
 			commandService = getInstanceOfType("com.cyrilBarillet.gazomatique.business.impl.simple.CommandService"); 
@@ -75,3 +68,4 @@ public class ServiceFactory extends GenericFactory {
 		return commandService;
 	}
 }
+
