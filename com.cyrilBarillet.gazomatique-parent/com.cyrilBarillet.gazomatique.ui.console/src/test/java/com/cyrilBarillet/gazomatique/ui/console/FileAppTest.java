@@ -1,5 +1,6 @@
 package com.cyrilBarillet.gazomatique.ui.console;
 
+import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -38,7 +39,8 @@ public class FileAppTest
     {
     	URL resourceURL = getClass().getResource("/test.txt");
     	try {
-    		String[] args={"-i", resourceURL.toURI().getPath()};
+    		File testFile = new File(resourceURL.toURI());
+    		String[] args={"-i", testFile.getPath()};
     		App.main(args);
     	} 
     	catch (URISyntaxException e)

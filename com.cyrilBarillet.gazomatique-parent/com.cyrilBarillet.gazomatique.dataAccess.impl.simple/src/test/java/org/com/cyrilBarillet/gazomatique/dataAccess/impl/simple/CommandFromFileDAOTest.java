@@ -1,7 +1,9 @@
 package org.com.cyrilBarillet.gazomatique.dataAccess.impl.simple;
 
+import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.FileSystems;
 import java.util.List;
 
 import com.cyrilBarillet.gazomatique.common.model.CommandEntity;
@@ -36,10 +38,11 @@ public class CommandFromFileDAOTest extends TestCase {
 		CommandFromFileDAO dao = new CommandFromFileDAO();
 		ExtendedCommandFromFileDAO daoTest = new ExtendedCommandFromFileDAO();
 		URL resourceURL = getClass().getResource("/test.txt");
-		LawnInformationVO information;
 		try {
+			File testFile = new File(resourceURL.toURI());
+			LawnInformationVO information;
 			List<CommandEntity> expected = daoTest.createCommandsTest("GAGAGAGAA");
-			information = new TextFileLawnInformationVO(resourceURL.toURI().getPath());
+			information = new TextFileLawnInformationVO(testFile.getPath());
 			List<CommandEntity> result = dao.findCommandByLawnMowerIndex(information, 0);
 			assertEquals(expected, result);
 			

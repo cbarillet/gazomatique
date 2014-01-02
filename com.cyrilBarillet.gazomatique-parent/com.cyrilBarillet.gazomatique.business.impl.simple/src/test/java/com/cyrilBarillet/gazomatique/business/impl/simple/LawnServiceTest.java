@@ -3,6 +3,7 @@
  */
 package com.cyrilBarillet.gazomatique.business.impl.simple;
 
+import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -68,7 +69,8 @@ public class LawnServiceTest extends TestCase {
 		LawnService service = new LawnService();
 		URL resourceURL = getClass().getResource("/test1.txt");
 		try {
-			LawnEntity lawn = service.mow(new TextFileLawnInformationVO(resourceURL.toURI().getPath()));
+			File testFile = new File(resourceURL.toURI());
+			LawnEntity lawn = service.mow(new TextFileLawnInformationVO(testFile.getPath()));
 			assertNotNull(lawn);
 			for (LawnMowerEntity mower : lawn.getLawnMowers()) {
 				if(!mower.getStartingPosition().equals(mower.getCurrentPosition()))
@@ -127,7 +129,8 @@ public class LawnServiceTest extends TestCase {
 		LawnService service = new LawnService();
 		URL resourceURL = getClass().getResource("/test3.txt");
 		try {
-			LawnEntity lawn = service.mow(new TextFileLawnInformationVO(resourceURL.toURI().getPath()));
+			File testFile = new File(resourceURL.toURI());
+			LawnEntity lawn = service.mow(new TextFileLawnInformationVO(testFile.getPath()));
 			assertNotNull(lawn);
 			for (LawnMowerEntity mower : lawn.getLawnMowers()) {
 				switch(mower.getIndex())
@@ -149,7 +152,8 @@ public class LawnServiceTest extends TestCase {
 		LawnService service = new LawnService();
 		URL resourceURL = getClass().getResource("/test4.txt");
 		try {
-			LawnEntity lawn = service.mow(new TextFileLawnInformationVO(resourceURL.toURI().getPath()));
+			File testFile = new File(resourceURL.toURI());
+			LawnEntity lawn = service.mow(new TextFileLawnInformationVO(testFile.getPath()));
 			assertNotNull(lawn);
 			for (LawnMowerEntity mower : lawn.getLawnMowers()) {
 				switch(mower.getIndex())
